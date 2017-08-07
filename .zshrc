@@ -1,80 +1,72 @@
-# Path to your oh-my-zsh installation.
-export ZSH=/Users/jack/.oh-my-zsh
+# Aliases
+alias l='ls -ltr'
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+# $PATH additions
+export PATH="$HOME/development/tools:$PATH"
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+# Misc. shell stuff
+autoload -U colors
+colors
+export PS1="%n@%m %B%1/%b $ "
+export HISTSIZE=2000
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+#########################
+##### START VI MODE #####
+#########################
 
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+setopt PROMPT_SUBST
 
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
+# Updates editor information when the keymap changes.
+function zle-keymap-select() {
+  zle reset-prompt
+  zle -R
+}
 
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+# Ensure that the prompt is redrawn when the terminal size changes.
+TRAPWINCH() {
+  zle &&  zle -R
+}
 
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+zle -N zle-keymap-select
+zle -N edit-command-line
 
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
 
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+bindkey -v
 
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
+# allow v to edit the command line (standard behaviour)
+autoload -Uz edit-command-line
+bindkey -M vicmd 'v' edit-command-line
 
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
+# allow ctrl-p, ctrl-n for navigate history (standard behaviour)
+bindkey '^P' up-history
+bindkey '^N' down-history
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git vi-mode)
+# allow ctrl-h, ctrl-w, ctrl-? for char and word deletion (standard behaviour)
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
 
-# User configuration
+# allow ctrl-r to perform backward search in history
+bindkey '^r' history-incremental-search-backward
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/opt/local/bin:/opt/local/sbin:/opt/local/lib/python2.4/site-packages/django/bin:/usr/texbin:/Users/jack/.cabal/bin:/Users/jack/oss/depot_tools"
-# export MANPATH="/usr/local/man:$MANPATH"
+# allow ctrl-a and ctrl-e to move to beginning/end of line
+bindkey '^a' beginning-of-line
+bindkey '^e' end-of-line
 
-source $ZSH/oh-my-zsh.sh
+# if mode indicator wasn't setup by theme, define default
+if [[ "$MODE_INDICATOR" == "" ]]; then
+  MODE_INDICATOR="%{$fg_bold[red]%}<%{$fg[red]%}<<%{$reset_color%}"
+fi
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+function vi_mode_prompt_info() {
+  echo "${${KEYMAP/vicmd/$MODE_INDICATOR}/(main|viins)/}"
+}
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+# define right prompt, if it wasn't defined by a theme
+if [[ "$RPS1" == "" && "$RPROMPT" == "" ]]; then
+  RPS1='$(vi_mode_prompt_info)'
+fi
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+#########################
+###### END VI MODE ######
+#########################
