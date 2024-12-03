@@ -1,0 +1,16 @@
+[diff]
+    tool = meld
+    compactionHeuristic = true
+[alias]
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    br = branch -vv --list --sort=-committerdate
+    ffm = merge origin/master --ff-only
+    ff = merge --ff-only
+    nb = "!f() { \
+            git checkout --no-track -b $1 origin/master; \
+          }; f"
+[user]
+    name = Jack Amadeo
+    email = jamadeo@gmail.com
+[core]
+    editor = /opt/homebrew/bin/vim
