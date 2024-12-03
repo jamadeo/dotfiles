@@ -13,4 +13,4 @@
     name = Jack Amadeo
     email = jamadeo@gmail.com
 [core]
-    editor = /opt/homebrew/bin/vim
+    editor = vim
