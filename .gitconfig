@@ -4,13 +4,24 @@
 [alias]
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     br = branch -vv --list --sort=-committerdate
-    ffm = merge origin/master --ff-only
+    ffm = merge $(git rev-parse --abbrev-ref origin/HEAD) --ff-only
     ff = merge --ff-only
     nb = "!f() { \
-            git checkout --no-track -b $1 origin/master; \
+            git checkout --no-track -b $1 $(git rev-parse --abbrev-ref origin/HEAD); \
+          }; f"
+    nw = "!f() { \
+            git worktree add --no-track -b $1 ~/worktrees/$1 $(git rev-parse --abbrev-ref origin/HEAD); \
+          }; f"
+    restack = "!f() { \
+            onto_branch=$1; \
+            echo rebasing onto merge-base with $onto_branch; \
+            base=$(git merge-base HEAD $onto_branch); \
+            git rebase $base --onto $onto_branch; \
           }; f"
 [user]
     name = Jack Amadeo
     email = jamadeo@gmail.com
 [core]
     editor = vim
+[grep]
+    lineNumber = true
