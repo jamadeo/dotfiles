@@ -127,8 +127,6 @@ PROMPT='%F{blue}%~%f${vcs_info_msg_0_}${GIT_STACK_PROMPT} %F{yellow}❯%f '
 # Keybindings
 # ------------------------------------------------------------
 
-bindkey -e
-
 autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
