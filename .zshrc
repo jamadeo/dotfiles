@@ -113,15 +113,22 @@ git_stack_prompt() {
   fi
 }
 
-_git_stack_precmd() {
-  GIT_STACK_PROMPT="$(git_stack_prompt)"
+hermit_prompt() {
+  if [[ -n "$HERMIT_ENV" ]]; then
+    print -r -- "🐚 "
+  fi
 }
 
-add-zsh-hook precmd _git_stack_precmd
+_custom_prompt_precmd() {
+  GIT_STACK_PROMPT="$(git_stack_prompt)"
+  HERMIT_PROMPT="$(hermit_prompt)"
+}
+
+add-zsh-hook precmd _custom_prompt_precmd
 
 setopt prompt_subst
 
-PROMPT='%F{blue}%~%f${vcs_info_msg_0_}${GIT_STACK_PROMPT} %F{yellow}❯%f '
+PROMPT='${HERMIT_PROMPT}%F{blue}%~%f${vcs_info_msg_0_}${GIT_STACK_PROMPT} %F{yellow}❯%f '
 
 # ------------------------------------------------------------
 # Keybindings
