@@ -1,0 +1,170 @@
+{
+  "$schema" : "https:\/\/schema.linearmouse.app\/0.11.2",
+  "schemes" : [
+    {
+      "buttons" : {
+        "mappings" : [
+          {
+            "action" : "missionControl",
+            "button" : 2,
+            "command" : false,
+            "control" : false,
+            "option" : false,
+            "shift" : true
+          },
+          {
+            "action" : {
+              "keyPress" : [
+                "optionRight",
+                "commandRight",
+                "arrowLeft"
+              ]
+            },
+            "button" : 3,
+            "command" : false,
+            "control" : false,
+            "option" : false,
+            "shift" : false
+          },
+          {
+            "action" : "missionControl.spaceLeft",
+            "button" : 3,
+            "command" : false,
+            "control" : false,
+            "option" : false,
+            "shift" : true
+          },
+          {
+            "action" : {
+              "keyPress" : [
+                "optionRight",
+                "commandRight",
+                "arrowRight"
+              ]
+            },
+            "button" : 4,
+            "command" : false,
+            "control" : false,
+            "option" : false,
+            "shift" : false
+          },
+          {
+            "action" : "missionControl.spaceRight",
+            "button" : 4,
+            "command" : false,
+            "control" : false,
+            "option" : false,
+            "shift" : true
+          }
+        ]
+      },
+      "if" : {
+        "device" : {
+          "category" : "mouse",
+          "productID" : "0xc52b",
+          "productName" : "USB Receiver",
+          "vendorID" : "0x46d"
+        }
+      },
+      "scrolling" : {
+        "reverse" : {
+          "vertical" : true
+        }
+      }
+    },
+    {
+      "buttons" : {
+        "mappings" : [
+          {
+            "action" : "missionControl",
+            "button" : 2,
+            "command" : false,
+            "control" : false,
+            "option" : false,
+            "shift" : true
+          }
+        ]
+      },
+      "if" : {
+        "device" : {
+          "category" : "mouse",
+          "productID" : "0xc52f",
+          "productName" : "USB Receiver",
+          "vendorID" : "0x46d"
+        }
+      }
+    },
+    {
+      "if" : {
+        "device" : {
+          "category" : "trackpad",
+          "productID" : "0x0",
+          "productName" : "Apple Internal Keyboard \/ Trackpad",
+          "serialNumber" : "FM7H7S0AVKZ000000Z+AEBN",
+          "vendorID" : "0x0"
+        }
+      },
+      "scrolling" : {
+        "reverse" : {
+          "vertical" : false
+        }
+      }
+    },
+    {
+      "buttons" : {
+        "mappings" : [
+          {
+            "action" : "missionControl",
+            "button" : 2,
+            "command" : false,
+            "control" : false,
+            "option" : false,
+            "shift" : true
+          },
+          {
+            "action" : {
+              "keyPress" : [
+                "option",
+                "command",
+                "arrowLeft"
+              ]
+            },
+            "button" : 3,
+            "command" : false,
+            "control" : false,
+            "option" : false,
+            "shift" : false
+          },
+          {
+            "action" : {
+              "keyPress" : [
+                "option",
+                "command",
+                "arrowRight"
+              ]
+            },
+            "button" : 4,
+            "command" : false,
+            "control" : false,
+            "option" : false,
+            "shift" : false
+          }
+        ]
+      },
+      "if" : {
+        "device" : {
+          "category" : "mouse",
+          "productID" : "0xb015",
+          "productName" : "M720 Triathlon",
+          "serialNumber" : "9C7CBAD5097A8198",
+          "vendorID" : "0x46d"
+        }
+      },
+      "scrolling" : {
+        "reverse" : {
+          "vertical" : true
+        }
+      }
+    }
+  ]
+}
