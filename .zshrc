@@ -200,3 +200,4 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export LEFTHOOK=0
+alias hass-ssh="LC_ALL=C TERM=xterm-256color command ssh hassio@homeassistant.local"
